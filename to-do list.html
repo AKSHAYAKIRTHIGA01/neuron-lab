@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #todo-list {
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        .task {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="todo-list">
+        <h1>Todo List</h1>
+        <input type="text" id="task-input" placeholder="Add a new task">
+        <button onclick="addTask()">Add</button>
+        <div id="tasks">
+            <!-- Tasks will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        function addTask() {
+            const taskInput = document.getElementById("task-input");
+            const taskText = taskInput.value.trim();
+
+            if (taskText !== "") {
+                const tasksContainer = document.getElementById("tasks");
+                const taskElement = document.createElement("div");
+                taskElement.classList.add("task");
+                taskElement.innerHTML = `
+                    <span>${taskText}</span>
+                    <button onclick="removeTask(this)">Remove</button>
+                `;
+                tasksContainer.appendChild(taskElement);
+
+                // Clear the input field
+                taskInput.value = "";
+            }
+        }
+
+        function removeTask(button) {
+            const taskElement = button.parentElement;
+            taskElement.remove();
+        }
+    </script>
+</body>
+</html>
